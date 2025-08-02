@@ -25,7 +25,6 @@ The faiss_index directory containing your pre-processed document embeddings.
 
 📦 Installation
 Clone the Repository (or create the files):
-First, create the four Python files (app.py, config.py, rag_logic.py, ui_components.py) and place them in a single directory.
 
 Install Required Libraries:
 Open your terminal or command prompt and navigate to the project directory. Run the following command to install all necessary Python libraries:
