@@ -2,7 +2,7 @@ CUSTOM_CSS = """
 <style>
     /* Main app styling */
     .stApp {
-        background: linear-gradient(135deg, #000000 0%, #121212 100%); /* Changed to a much darker gradient */
+        background: linear-gradient(135deg, #000000 0%, #121212 100%);
         color: #FFFFFF;
     }
     
@@ -100,7 +100,7 @@ CUSTOM_CSS = """
     
     /* Sidebar styling */
     .css-1d391kg {
-        background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+        background: linear-gradient(135deg, #000000 0%, #121212 100%); /* Changed to a much darker gradient */
     }
     
     /* Text input styling */
