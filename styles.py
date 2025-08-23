@@ -2,8 +2,8 @@ CUSTOM_CSS = """
 <style>
     /* Main app styling */
     .stApp {
-        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-        color: #f5f5dc;
+        background: linear-gradient(135deg, #000000 0%, #121212 100%); /* Changed to a much darker gradient */
+        color: #FFFFFF;
     }
     
     /* Remove default padding */
@@ -21,9 +21,9 @@ CUSTOM_CSS = """
     
     .chat-message.user {
         background: linear-gradient(135deg, #333333, #404040);
-        color: #f5f5dc;
+        color: #FFFFFF;
         margin-left: 2rem;
-        border-left: 4px solid #f5f5dc;
+        border-left: 4px solid #FFFFFF;
     }
     
     .chat-message.assistant {
@@ -36,7 +36,7 @@ CUSTOM_CSS = """
     /* Flashcard styling */
     .flashcard {
         background: linear-gradient(135deg, #2d2d2d, #404040);
-        color: #f5f5dc;
+        color: #FFFFFF;
         padding: 2rem;
         border-radius: 20px;
         text-align: center;
@@ -45,7 +45,7 @@ CUSTOM_CSS = """
         align-items: center;
         justify-content: center;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        border: 2px solid #f5f5dc;
+        border: 2px solid #FFFFFF;
         transition: all 0.3s ease;
         cursor: pointer;
     }
@@ -73,19 +73,19 @@ CUSTOM_CSS = """
     /* Score display */
     .score-display {
         background: linear-gradient(135deg, #333333, #404040);
-        color: #f5f5dc;
+        color: #FFFFFF;
         padding: 1rem;
         border-radius: 10px;
         text-align: center;
         margin-bottom: 1rem;
-        border: 1px solid #f5f5dc;
+        border: 1px solid #FFFFFF;
     }
     
     /* Button styling */
     .stButton > button {
         background: linear-gradient(135deg, #333333, #404040);
-        color: #f5f5dc;
-        border: 2px solid #f5f5dc;
+        color: #FFFFFF;
+        border: 2px solid #FFFFFF;
         border-radius: 10px;
         font-weight: 500;
         transition: all 0.3s ease;
@@ -106,30 +106,30 @@ CUSTOM_CSS = """
     /* Text input styling */
     .stTextInput > div > div > input {
         background-color: #2d2d2d;
-        color: #f5f5dc;
+        color: #FFFFFF;
         border: 2px solid #404040;
         border-radius: 10px;
     }
     
     .stTextInput > div > div > input:focus {
-        border-color: #f5f5dc;
-        box-shadow: 0 0 0 2px rgba(245, 245, 220, 0.2);
+        border-color: #FFFFFF;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
     }
     
     /* Progress indicator */
     .flashcard-progress {
         background: #333333;
-        color: #f5f5dc;
+        color: #FFFFFF;
         padding: 0.5rem 1rem;
         border-radius: 20px;
         text-align: center;
         margin: 1rem 0;
-        border: 1px solid #f5f5dc;
+        border: 1px solid #FFFFFF;
     }
     
     /* Loading spinner color */
     .stSpinner > div {
-        border-top-color: #f5f5dc !important;
+        border-top-color: #FFFFFF !important;
     }
 </style>
 """
