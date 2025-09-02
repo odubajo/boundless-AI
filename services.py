@@ -1,25 +1,36 @@
+# services.py
 import streamlit as st
 import json
 import random
 from api_client import call_gemini_api
+from utils import get_text, get_language_name
 
 def generate_rag_response(user_query: str, db) -> str:
     if db is None:
-        return "Knowledge base is not available."
+        return get_text("db_not_available")
 
     try:
-        with st.spinner("Searching knowledge base..."):
+        with st.spinner(get_text("searching_knowledge")):
             relevant_docs = db.similarity_search(user_query, k=4) 
 
         if not relevant_docs:
-            return "🤔 I couldn't find relevant information in my knowledge base for that question."
+            return get_text("no_relevant_info")
 
         context = "\n\n".join([f"Document {i+1}:\n{doc.page_content}"
                               for i, doc in enumerate(relevant_docs)])
 
+        # Get the current language for response
+        current_lang = st.session_state.get("selected_language", "en")
+        lang_name = get_language_name(current_lang)
+        
+        # Create language-specific prompt
+        language_instruction = ""
+        if current_lang != "en":
+            language_instruction = f"Please respond in {lang_name}. "
+
         prompt = f"""You are a knowledgeable AI assistant specializing in Boundless and RISC Zero's ZK Protocol. 
         
-Using the context below, provide a helpful and accurate answer to the user's question. 
+{language_instruction}Using the context below, provide a helpful and accurate answer to the user's question. 
 If the context doesn't contain enough information, acknowledge this and provide what information you can.
 
 Context:
@@ -29,11 +40,11 @@ User Question: {user_query}
 
 Please provide a clear, informative answer:"""
 
-        with st.spinner("🤖 Generating response..."):
+        with st.spinner(get_text("generating_response")):
             return call_gemini_api(prompt)
 
     except Exception as e:
-        return f"An error occurred while processing your question: {e}"
+        return get_text("error_processing", error=str(e))
 
 def generate_flashcards(db, num_flashcards: int = 5) -> list:
     if db is None:
@@ -51,7 +62,16 @@ def generate_flashcards(db, num_flashcards: int = 5) -> list:
         # Create context from selected documents
         context = "\n\n---DOCUMENT SEPARATOR---\n\n".join([doc.page_content for doc in selected_docs])
 
-        prompt = f"""Create {num_flashcards} educational flashcards about Boundless and RISC Zero's ZK Protocol based on the provided context.
+        # Get the current language for flashcards
+        current_lang = st.session_state.get("selected_language", "en")
+        lang_name = get_language_name(current_lang)
+        
+        # Create language-specific prompt
+        language_instruction = ""
+        if current_lang != "en":
+            language_instruction = f"Create the flashcards in {lang_name}. Both questions and answers should be in {lang_name}. "
+
+        prompt = f"""{language_instruction}Create {num_flashcards} educational flashcards about Boundless and RISC Zero's ZK Protocol based on the provided context.
 
 Each flashcard should:
 - Have a clear, specific question
@@ -76,7 +96,7 @@ Generate exactly {num_flashcards} flashcards in the specified JSON format."""
             }
         }
 
-        with st.spinner("🎴 Generating flashcards..."):
+        with st.spinner(get_text("generating_flashcards")):
             response = call_gemini_api(prompt, use_json_schema=True, schema=schema)
 
         try:

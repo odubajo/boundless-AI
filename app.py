@@ -1,4 +1,4 @@
-# main.py
+# app.py
 import streamlit as st
 import utils
 import ui
@@ -17,20 +17,20 @@ def main():
     utils.initialize_session_state()
     ui.apply_custom_css()
 
-    # Render header and sidebar
-    st.markdown("# 🚀 Boundless communtity knowledge assistant")
-    st.markdown("*Learn about RISC Zero's Universal ZK Protocol*")
+    # Render header and sidebar with language support
+    st.markdown(f"# {utils.get_text('community_knowledge')}")
+    st.markdown(f"*{utils.get_text('app_subtitle')}*")
     ui.sidebar_info()
 
     db = utils.get_vector_db()
     if not db:
-        st.error("❌ Cannot proceed without vector database. Please check the setup instructions.")
+        st.error(utils.get_text("cannot_proceed"))
         st.stop()
 
     if st.session_state.app_mode is None:
         ui.render_mode_selection()
     else:
-        if st.button("⬅ Back to Menu", type="secondary"):
+        if st.button(utils.get_text("back_to_menu"), type="secondary"):
             st.session_state.app_mode = None
             st.rerun()
 
